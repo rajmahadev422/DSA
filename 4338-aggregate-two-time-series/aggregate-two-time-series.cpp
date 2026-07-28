@@ -1,36 +1,35 @@
 class Solution {
 public:
-    int getValue(map<int, int>& mp, int key) {
-        auto it = mp.lower_bound(key);
-
-        if (it == mp.end())
-            return 0;
-
-        return it->second;
-    }
     vector<vector<int>> aggregateTimeSeries(vector<vector<int>>& series1, vector<vector<int>>& series2) {
-        map<int, int> ump1;
-        map<int, int> ump2;
+        vector<vector<int>> ans;
 
-        set<int> s;
-        for (int i = 0; i < series1.size(); i++) {
-            ump1[series1[i][0]] = series1[i][1];
-            s.insert(series1[i][0]);
+        int i = 0, j = 0, n = series1.size(), m = series2.size();
+
+        while(i < n and j < m) {
+            if(series1[i][0] == series2[j][0]) {
+                ans.push_back({series1[i][0], series1[i][1] + series2[j][1]});
+                i++;
+                j++;
+            }
+            else if (series1[i][0] < series2[j][0]) {
+                ans.push_back({series1[i][0], series1[i][1] + series2[j][1]});
+                i++;
+            }
+            else {
+                ans.push_back({series2[j][0], series1[i][1] + series2[j][1]});
+                j++;
+            }
         };
-        for (int i = 0; i < series2.size(); i++) {
-            ump2[series2[i][0]] = series2[i][1];
-            s.insert(series2[i][0]);
-        };
-
-        vector<vector<int>> ans(s.size(), vector<int>(2));
-
-        int idx = 0;
-        for (int ele : s) {
-            // cout<<ele<<" ";
-            ans[idx][0] = ele;
-            ans[idx][1] = getValue(ump1, ele) + getValue(ump2, ele);
-            idx++;
-        }
+        if(i < n)
+            while(i < n) {
+                ans.push_back({series1[i][0], series1[i][1]});
+                i++;
+            }
+        if(j < m)
+            while(j < m) {
+                ans.push_back({series2[j][0], series2[j][1]});
+                j++;
+            }
         return ans;
     }
 };
