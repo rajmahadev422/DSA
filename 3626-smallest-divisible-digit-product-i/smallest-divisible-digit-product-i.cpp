@@ -13,5 +13,6 @@ public:
             }
             n++;
         }
+        return -1;
     }
 };
