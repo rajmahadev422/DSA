@@ -8,11 +8,9 @@ public:
             int p = 1;
 
             for(int i = 0;i < str.length();i++) p *= (str[i] - '0');
-            cout<<p<<" ";
             if(p % t == 0) {
                 return n;
             }
-            
             n++;
         }
     }
