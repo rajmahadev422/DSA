@@ -32,13 +32,8 @@ public:
                     continue;
 
                 if (grid[i][j] == 1) {
-                    grid[i][j] = 0;
-                    tot--;
-
-                    dfs(grid, i + 1, j, tot);
-                    dfs(grid, i - 1, j, tot);
-                    dfs(grid, i, j + 1, tot);
-                    dfs(grid, i, j - 1, tot);
+                    
+                    dfs(grid, i, j, tot);
                 }
             }
         }
