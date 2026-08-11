@@ -8,6 +8,8 @@ public:
         for(int i = 1;i < nums.size();i++) {
             if(flag and nums[i] - 1 == prev) sum += nums[i];
             else flag = false;
+
+            if(nums[i] == sum) sum++;
             prev = nums[i];
             mp[prev] = true;
         }
