@@ -1,6 +1,5 @@
 class Solution {
 public:
-    unordered_map<int, int> dp;
     
     int longestSubsequence(vector<int>& nums) {
         int cnt = 0, x = 0;
