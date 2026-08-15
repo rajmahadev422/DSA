@@ -1,10 +1,11 @@
 class Solution {
 public:
     unordered_map<int, int> dp;
-    void solve(int idx, int x, int n, vector<int> & nums, priority_queue<int> &pq) {
+    void solve(int idx, int x, int n, vector<int> & nums, priority_queue<int, vector<int>, greater<int> > &pq) {
         if(dp.contains(idx) and dp[idx] >= n) return;
         if(x != 0) {
             pq.push(n);
+            if(pq.size() == 2) pq.pop();
             dp[idx] = n;
         }
         if(idx >= nums.size()) return;
@@ -20,10 +21,10 @@ public:
         }
         if(x != 0) return nums.size();
         if(cnt == nums.size()) return 0;
-        // if(nums.size() == 1 and nums[0] == 0) return 0;
-        priority_queue<int> pq;
-        solve(0, 0, 0, nums, pq);
         
+        priority_queue<int, vector<int>, greater<int> > pq;
+        solve(0, 0, 0, nums, pq);
+        if(pq.size() == 2) pq.pop();
         return pq.top();
     }
 };
