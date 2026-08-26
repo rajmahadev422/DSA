@@ -2,7 +2,7 @@ class Solution {
 public:
     string shortestBeautifulSubstring(string s, int k) {
 
-        priority_queue< pair< int, string>, vector<pair<int, string>>, greater<pair<int, string>> > pq;
+        priority_queue< pair< int, string >, vector< pair<int, string> >, greater< pair<int, string> > > pq;
 
         for (int i = 0; i < s.length(); i++) {
             int cnt = 0;
