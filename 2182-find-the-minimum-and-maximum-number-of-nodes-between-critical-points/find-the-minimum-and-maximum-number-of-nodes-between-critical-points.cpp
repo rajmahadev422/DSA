@@ -34,7 +34,6 @@ public:
 
         sort(v.begin(), v.end());
 
-        for(int ele:v) cout<<ele<<" ";
         ans[1] = v[v.size() - 1] - v[0];
         int mn = INT_MAX;
         for (int i = 0; i < v.size() - 1; i++)
