@@ -13,21 +13,7 @@ class Solution {
 public:
     int ans = 0;
     pair<int, int> dfs(TreeNode* root) {
-        if(!root->left and !root->right) {
-            ans++;
-            return make_pair(root->val, 1);
-        }
-
-        if(!root->left) {
-            pair<int, int> temp = dfs(root->right);
-            if((temp.first + root->val) / (temp.second + 1) == root->val) ans++;
-            return make_pair(temp.first + root->val, temp.second + 1);
-        }
-        else if(!root->right) {
-            pair<int, int> temp = dfs(root->left);
-            if((temp.first + root->val) / (temp.second + 1) == root->val) ans++;
-            return make_pair(temp.first + root->val, temp.second + 1);
-        }
+        if(!root) return make_pair(0,0);
 
         pair<int, int> left = dfs(root->left);
         pair<int, int> right = dfs(root->right);
@@ -38,7 +24,7 @@ public:
     }
     int averageOfSubtree(TreeNode* root) {
         pair<int, int> p = dfs(root);
-        cout<<p.first<<" "<<p.second;
+        
         return ans;
     }
 };
