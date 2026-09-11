@@ -1,31 +1,38 @@
 class Solution {
 public:
-    int num(int a, int b, int c) {
-        string str = "";
-        str += to_string(a);
-        str += to_string(b);
-        str += to_string(c);
-
-        int ans = stoi(str);
-        if(ans >= 100 and ans % 2 == 0) return ans;
-        return -1;
-    }
     int totalNumbers(vector<int>& d) {
-        set<int> st;
-        st.insert(-1);
-        int n = d.size();
-        for(int i = 0;i < n;i++) {
-            for(int j = i + 1;j < n;j++) {
-                for(int k = j + 1;k < n;k++) {
-                    st.insert(num(d[i], d[j], d[k]));
-                    st.insert(num(d[i], d[k], d[j]));
-                    st.insert(num(d[k], d[j], d[i]));
-                    st.insert(num(d[k], d[i], d[j]));
-                    st.insert(num(d[j], d[k], d[i]));
-                    st.insert(num(d[j], d[i], d[k]));
+        vector<int> cnt(10, 0);
+
+        for (int x : d)
+            cnt[x]++;
+
+        int ans = 0;
+
+        for (int a = 1; a <= 9; a++) {
+            for (int b = 0; b <= 9; b++) {
+                for (int c = 0; c <= 8; c += 2) {
+                    if (cnt[a] == 0 || cnt[b] == 0 || cnt[c] == 0)
+                        continue;
+
+                    if (a == b && b == c) {
+                        if (cnt[a] < 3)
+                            continue;
+                    } else if (a == b) {
+                        if (cnt[a] < 2)
+                            continue;
+                    } else if (a == c) {
+                        if (cnt[a] < 2)
+                            continue;
+                    } else if (b == c) {
+                        if (cnt[b] < 2)
+                            continue;
+                    }
+
+                    ans++;
                 }
             }
         }
-        return st.size() - 1;;
+
+        return ans;
     }
 };
