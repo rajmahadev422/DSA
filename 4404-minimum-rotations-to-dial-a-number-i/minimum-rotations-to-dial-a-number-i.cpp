@@ -5,9 +5,7 @@ public:
 
         for(char ele: s) {
             int n = ele - '0';
-            int t = min(abs(n - prev), 10 - abs(n - prev));
-            cout<<t<<" ";
-            ans += t;
+            ans += min(abs(n - prev), 10 - abs(n - prev));
             prev = n;
         }
         return ans;
